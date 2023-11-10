@@ -10,12 +10,14 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.appName }}
-      tier: frontend
+      tier: backend
   template:
     metadata:
       labels:
         app: {{ .Values.appName }}
-        tier: frontend
+        tier: backend
+    annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec: # Pod spec
       containers:
         - name: mycontainer

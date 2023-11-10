@@ -1,0 +1,12 @@
+appName: kafka
+
+image:
+  name: bitnami/kafka
+  tag: latest
+
+namespace: default
+
+configmap:
+  name: myappconfigmapv0.1
+  data:
+    CUSTOM_HEADER: "This app was deployed with Helm!"

@@ -1,7 +1,7 @@
-appName: myapp
+appName: account-service
 
 image:
-  name: jstjerne/distributed_app
+  name: jstjerne/account-service
   tag: latest
 
 namespace: default
