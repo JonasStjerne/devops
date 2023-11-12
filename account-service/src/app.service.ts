@@ -1,12 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from './prisma.service';
 
 @Injectable()
 export class AppService {
+  constructor(private prisma: PrismaService) {}
+
   getHello(): string {
     return 'Hello World!';
   }
 
-  getBalance() {
+  createAccount() {}
+
+  setAccountStatus() {}
+
+  getBalance(IBAN: Prisma.AccountWhereInput) {
     return 100;
   }
 

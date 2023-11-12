@@ -12,14 +12,15 @@ datasource db {
 
 model Account {
   id    Int     @default(autoincrement()) @id
+  accountOwnerId Int @unique
   IBAN Int @unique
   name  String?
   balance Int
-  status AccountStatus @default(INACTIVE)
+  status String
 }
 
-enum AccountStatus {
-  INACTIVE
-  ACTIVE
-  CLOSED
-}
+// enum AccountStatus {
+//   INACTIVE
+//   ACTIVE
+//   CLOSED
+// }
