@@ -10,11 +10,11 @@ export class AppService {
     return 'Hello World!';
   }
 
-  async createAccount(account: Account) {
+  async create(account: Omit<Account, 'id'>) {
     return await this.prisma.account.create({ data: account });
   }
 
-  async setAccountStatus(setAccountStatusDto: Pick<Account, 'status' | 'id'>) {
+  async setStatus(setAccountStatusDto: Pick<Account, 'status' | 'id'>) {
     const account = await this.prisma.account.update({
       where: { id: setAccountStatusDto.id },
       data: {
