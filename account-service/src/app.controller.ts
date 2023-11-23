@@ -16,7 +16,7 @@ export class AppController {
     const newAccount: Omit<Account, 'id'> = {
       name: accountCreateDto.name,
       status: 'open',
-      IBAN: Math.random() * 10000,
+      IBAN: Number((Math.random() * 10000000).toFixed(0)),
       accountOwnerId: 10,
       balance: 0,
     };
