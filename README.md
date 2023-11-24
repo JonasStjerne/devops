@@ -12,3 +12,28 @@ To see running pods in k8 use the `kubectl get pods` command.
 
 To forward ports to local machine use command:
 `kubectl --namespace default port-forward $POD_NAME 8080:8080`
+
+To create a pod that you can use as a Kafka client run the following commands:
+
+```
+    kubectl run my-kafka-client --restart='Never' --image docker.io/bitnami/kafka:3.6.0-debian-11-r2 --namespace default --command -- sleep infinity
+    kubectl cp --namespace default /path/to/client.properties my-kafka-client:/tmp/client.properties
+    kubectl exec --tty -i my-kafka-client --namespace default -- bash
+```
+
+```
+    PRODUCER:
+        kafka-console-producer.sh \
+            --producer.config /tmp/client.properties \
+            --broker-list my-kafka-controller-0.my-kafka-controller-headless.default.svc.cluster.local:9092,my-kafka-controller-1.my-kafka-controller-headless.default.svc.cluster.local:9092,my-kafka-controller-2.my-kafka-controller-headless.default.svc.cluster.local:9092 \
+            --topic test
+```
+
+```
+    CONSUMER:
+        kafka-console-consumer.sh \
+            --consumer.config /tmp/client.properties \
+            --bootstrap-server my-kafka.default.svc.cluster.local:9092 \
+            --topic test \
+            --from-beginning
+```
