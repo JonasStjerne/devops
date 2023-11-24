@@ -8,8 +8,11 @@ RUN npm install glob rimraf
 
 RUN npm install --only=development
 
+RUN npm install prisma -g
+
 COPY . ./
 
+RUN prisma generate
 RUN npm run build
 
 FROM node:current-alpine3.16 as production
