@@ -46,3 +46,6 @@ To create a pod that you can use as a Kafka client run the following commands:
 ```
 
 To start kafka and kafka ui run: `docker-compose -f kafka-ui.yaml up`
+Kafka ui will be available on port 8080.
+
+To open Prisma studio run `npx prisma studio`
