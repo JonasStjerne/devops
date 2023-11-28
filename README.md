@@ -5,7 +5,7 @@ To push a new docker image do: `docker push jstjerne/distributed_app:tagname´.
 Then change the tagname in the helm chart for the service.
 
 To deploy a service using the Helm templating add a `<service-name>.values.yaml` file to the `helm` directory.
-When deploying to kubernaetes install the helm chart by cd into the helm directory and running:
+When deploying to kubernetes install the helm chart by cd into the helm directory and running:
 
 `helm install -f <service-name>.values.yaml <service-name> .`
 
