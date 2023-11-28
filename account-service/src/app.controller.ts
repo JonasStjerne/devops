@@ -13,7 +13,7 @@ export class AppController {
   }
   @EventPattern('create_account')
   async create(accountCreateDto: Pick<Account, 'name'>) {
-    const newAccount: Omit<Account, 'id'> = {
+    const newAccount: Omit<Account, 'id' | 'createdAt' | 'updatedAt'> = {
       name: accountCreateDto.name,
       status: 'open',
       IBAN: Number((Math.random() * 10000000).toFixed(0)),

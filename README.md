@@ -44,3 +44,5 @@ To create a pod that you can use as a Kafka client run the following commands:
             --topic test \
             --from-beginning
 ```
+
+To start kafka and kafka ui run: `docker-compose -f kafka-ui.yaml up`

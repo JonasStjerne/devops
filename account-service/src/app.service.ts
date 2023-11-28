@@ -10,7 +10,8 @@ export class AppService {
     return 'Hello World!';
   }
 
-  async create(account: Omit<Account, 'id'>) {
+  async create(account: Omit<Account, 'id' | 'createdAt' | 'updatedAt'>) {
+    console.log('Creating account');
     return await this.prisma.account.create({ data: account });
   }
 

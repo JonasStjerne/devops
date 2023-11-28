@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
 model Account {
@@ -17,6 +17,8 @@ model Account {
   name  String?
   balance Int
   status String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // enum AccountStatus {
