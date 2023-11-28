@@ -13,11 +13,12 @@ export class AppController {
   }
   @EventPattern('create_account')
   async create(accountCreateDto: Pick<Account, 'name'>) {
+    console.log('Read from kafka');
     const newAccount: Omit<Account, 'id' | 'createdAt' | 'updatedAt'> = {
       name: accountCreateDto.name,
       status: 'open',
       IBAN: Number((Math.random() * 10000000).toFixed(0)),
-      accountOwnerId: 10,
+      accountOwnerId: Number((Math.random() * 10000000).toFixed(0)),
       balance: 0,
     };
     const result = await this.appService.create(newAccount);
