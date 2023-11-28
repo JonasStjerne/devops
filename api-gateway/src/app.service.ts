@@ -12,6 +12,6 @@ export class AppService implements OnModuleInit {
   }
 
   createAccount(accountName: string) {
-    this.accountClient.emit('create_account', accountName);
+    this.accountClient.emit('create_account', { name: accountName });
   }
 }
