@@ -8,8 +8,9 @@ export class AppController {
     private readonly appService: AppService,
     @Inject('AUTH_SERVICE') private authClient: ClientKafka,
   ) {}
-  onModuleInit() {
+  async onModuleInit() {
     this.authClient.subscribeToResponseOf('getToken_auth');
+    await this.authClient.connect();
   }
 
   @Get()
@@ -17,12 +18,12 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post()
+  @Post('account/create')
   createAccount(@Body() createAccountDto: { name: string }) {
     this.appService.createAccount(createAccountDto.name);
   }
 
-  @Post()
+  @Post('auth/login')
   async loginUser(@Body() loginUserDto: { email: string; password: string }) {
     return await this.appService.loginUser(loginUserDto);
   }
