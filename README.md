@@ -49,3 +49,9 @@ To start kafka and kafka ui run: `docker-compose -f kafka-ui.yaml up`
 Kafka ui will be available on port 8080.
 
 To open Prisma studio run `npx prisma studio`
+
+## Argo CD
+Argo CD is used to deploy and manage state of the Kubernetes cluster. To setup the Argo CD follow the [getting started guide](https://argo-cd.readthedocs.io/en/stable/getting_started/).
+Argo CD will apply the Helm Charts to the cluster. Also, Argo CD should be used to watch the container registries for new image tags and commit the declaration for using the new image tag to the Helm Chart.
+https://argocd-image-updater.readthedocs.io/en/stable/basics/update-methods/
+
