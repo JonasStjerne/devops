@@ -17,6 +17,6 @@ export class AppController {
     //Check if password matches using bcrypt
     //Sign new token using jwt
     // console.log('Recived request', loginUserDto);
-    this.appService.getToken(loginUserDto.email);
+    // this.appService.getToken(loginUserDto.email);
   }
 }

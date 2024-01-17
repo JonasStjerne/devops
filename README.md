@@ -1,6 +1,6 @@
 # DevOps
 
-To push a new docker image do: `docker push jstjerne/distributed_app:tagname´.
+To push a new docker image do: `docker push jstjerne/distributed_app:tagname`. The local image name needs to match remote registry image name. To tag local image when building use `docker build -t jstjerne/distributed_app:tagname .`
 
 Then change the tagname in the helm chart for the service.
 
