@@ -51,7 +51,18 @@ Kafka ui will be available on port 8080.
 To open Prisma studio run `npx prisma studio`
 
 ## Argo CD
+
 Argo CD is used to deploy and manage state of the Kubernetes cluster. To setup the Argo CD follow the [getting started guide](https://argo-cd.readthedocs.io/en/stable/getting_started/).
 Argo CD will apply the Helm Charts to the cluster. Also, Argo CD should be used to watch the container registries for new image tags and commit the declaration for using the new image tag to the Helm Chart.
 https://argocd-image-updater.readthedocs.io/en/stable/basics/update-methods/
 
+### Setting up ArgoCD
+
+Using the `install.yaml` file in the helm directory, ArgoCD can be deployed to the cluster.
+Use the command `kube apply -n default -f install.yaml` to apply the installation to the cluster.
+
+Then expose the API server using `kubectl port-forward svc/argocd-server -n default 8080:443`
+
+The UI will now be accessible at `https://localhost:8080`
+
+Default password for the `admin` user is auto-generated. To get the password use the command `argocd admin initial-password -n default`. The password only needs to be used for the initial login.
