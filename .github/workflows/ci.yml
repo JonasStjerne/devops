@@ -15,6 +15,10 @@ jobs:
           - auth-service
     
     steps:
+     - name: Determine Changed Files
+        id: changed-files
+        run: echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^${{ matrix.service }}/.*' || true)" >> $GITHUB_OUTPUT
+        
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         
