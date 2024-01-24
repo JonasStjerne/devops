@@ -1,0 +1,39 @@
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - '**/*' # Trigger on any change in the repository
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        service:
+          - auth-service
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Determine Changed Files
+        id: changed-files
+        run: echo "::set-output name=changed::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^${{ matrix.service }}/.*' || true)"
+
+      - name: Check if Service Changed
+        id: service-changed
+        run: echo "::set-output name=changed::$(if [ -n "${{ steps.changed-files.outputs.changed }}" ]; then echo "true"; else echo "false"; fi)"
+
+      - name: Login to Docker Hub
+        if: steps.service-changed.outputs.changed == 'true'
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and Push Docker Image
+        if: steps.service-changed.outputs.changed == 'true'
+        run: |
+          service_name=${{ matrix.service }}
+          docker build -t jstjerne/$service_name:latest $service_name
+          docker push jstjerne/$service_name:latest
+
