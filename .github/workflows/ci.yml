@@ -16,6 +16,7 @@ jobs:
     
     steps:
       - name: Determine Changed Files
+        uses: actions/checkout@v4
         id:  changed-files
         run: echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^${{ matrix.service }}/.*' || true)" >> $GITHUB_OUTPUT
         
